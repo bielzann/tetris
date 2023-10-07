@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <title>Tetris</title>
     <meta charset="utf-8">
+    <script src="script.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,27 +28,258 @@
                 <p class="titulo-corner">Modo de jogo:</p>
                 <div class="espaco-modos">
                     <div class="botaoModo-esq">
-                        <p class="modo">Clássico (10x20)</p>
+                        <button class="modo" id="classico-botao" disabled>Clássico 10x20</button>  
                     </div>
                     <div class="botaoModo-esq">
-                        <p class="modo">Estendido (22x44)</p>
+                        <button class="modo" id="estendido-botao" disabled>Estendido 22x44</button>  
                     </div>
                 </div>
                 <div class="espaco-botoes">
                     <div class="miniBotoes-cima">
-                        <div class="miniBotao"><img class="imgBotao" src="images/play.png" alt="play button"></div>
-                        <div class="miniBotao"><img class="imgBotao" src="images/pause.png" alt="pause button"></div>
+                        <button class="miniBotao" id="start-button">Start</button>
+                        <button class="miniBotao" id="pause-button" disabled>Pause</button>                        
                     </div>
                     <div class="miniBotoes-baixo">
-                        <div class="miniBotao"><img class="imgBotao" src="images/restart.png" alt="restart button"></div>
-                        <div class="miniBotao"><img class="imgBotao" src="images/power-button.png" alt="on-off button"></div>
+                        <button class="miniBotao" id="restart-button" disabled>Reiniciar</button>  
+                        <button class="miniBotao" id="trocarModo-button" disabled>Trocar modo</button>  
                     </div>
                 </div>
             </div>
         </div>
         <div class="game-container">
             <div class="game-screen">
-                <img id="imagem-jogo" src="images/Tetris_Board.png" alt="tetris game image">
+                      <div class="grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                        <div class="taken"></div>
+                    </div>
+
+
+                    <div class="mini-grid">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
             </div>
         </div>
         <div class="corner-box">
@@ -59,7 +292,7 @@
                     Nível: 0
                 </div>
                 <div class="botaoModo3">
-                    0 pts
+                    <h3>Score:<span id="score">0</span></h3>
                 </div>
                 <div class="botaoModo3">
                         00:00
