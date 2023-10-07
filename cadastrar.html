@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Cadastrar</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>    
+<body>
+    <header>
+        <div class="espaco-cabecalho">
+            <ul class="menu">
+                <li class="menu-item"><a href="tetris.html">Início</a></li>
+                <li class="menu-item"><a href="ranking.html">Ranking</a></li>
+                <li class="menu-item"><a href="editarPerfil.html">Perfil</a></li>
+            </ul>
+            <span class="tetris">TETRIS</span>
+            <a class="desconectar" href=conectar.html>Desconectar</a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="cadastrar">
+            <h1>Cadastrar</h1>
+            <form>
+                <div class="infoNome">
+                  <input type="text" class="controle" id="inputNome" placeholder="Nome completo">
+                </div>
+                <div class="infoEmail">
+                  <input type="email" class="controle" id="inputEmail" placeholder="Email">
+                </div>
+                <div class="infoNickSenha">
+                  <input type="text" class="controle" id="inputNickName" placeholder="Username">
+                    <input type="password" class="controle" id="inputSenha" placeholder="Senha">
+                </div>
+                <div class="infoCPF">
+                  <input type="text" class="controle" id="inputCPF" placeholder="CPF">
+                </div>
+                <div class="infoNascimentoTelefone">
+                    <input type="date" class="controle" id="inputDataNascimento">
+                    <input type="tel" class="controle" id="inputTelefone" placeholder="Telefone">
+                </div>
+                <button type="submit" class="botaoEnviar">Cadastrar</button>
+              </form>
+        </div>
+    </div>
+
+    <footer>
+        <p class="texto-footer">© Unicamp</p>
+    </footer>
+</body>
+</html>

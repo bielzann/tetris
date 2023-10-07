@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Tetris</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>   
+<body>
+    <header>
+      <div class="espaco-cabecalho">
+          <ul class="menu">
+              <li class="menu-item"><a href="tetris.html">Início</a></li>
+              <li class="menu-item"><a href="ranking.html">Ranking</a></li>
+              <li class="menu-item"><a href="editarPerfil.html">Perfil</a></li>
+          </ul>
+          <span class="tetris">TETRIS</span>
+          <a class="desconectar" href=conectar.html>Desconectar</a>
+      </div>
+    </header>
+    <div class="main-content">
+        <div class="corner-box">
+            <div class="conteudo-corner">
+                <p class="titulo-corner">Modo de jogo:</p>
+                <div class="espaco-modos">
+                    <div class="botaoModo-esq">
+                        <p class="modo">Clássico (10x20)</p>
+                    </div>
+                    <div class="botaoModo-esq">
+                        <p class="modo">Estendido (22x44)</p>
+                    </div>
+                </div>
+                <div class="espaco-botoes">
+                    <div class="miniBotoes-cima">
+                        <div class="miniBotao"><img class="imgBotao" src="images/play.png" alt="play button"></div>
+                        <div class="miniBotao"><img class="imgBotao" src="images/pause.png" alt="pause button"></div>
+                    </div>
+                    <div class="miniBotoes-baixo">
+                        <div class="miniBotao"><img class="imgBotao" src="images/restart.png" alt="restart button"></div>
+                        <div class="miniBotao"><img class="imgBotao" src="images/power-button.png" alt="on-off button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game-container">
+            <div class="game-screen">
+                <img id="imagem-jogo" src="images/Tetris_Board.png" alt="tetris game image">
+            </div>
+        </div>
+        <div class="corner-box">
+            <div class="conteudo-corner">
+                <p class="titulo-corner">UsuárioEX</p>
+                <div class="botaoModo2">
+                    Modo: Clássico
+                </div>
+                <div class="botaoModo2">
+                    Nível: 0
+                </div>
+                <div class="botaoModo3">
+                    0 pts
+                </div>
+                <div class="botaoModo3">
+                        00:00
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p class="texto-footer">© Unicamp</p>
+    </footer>
+</body>
+</html>
