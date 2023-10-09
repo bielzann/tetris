@@ -24,7 +24,7 @@
     <div class="content">
         <div class="editar">
             <h1>Editar perfil</h1>
-            <form>
+            <form id="editarForm">
                 <div class="infoNome">
                   <input type="text" class="controle" id="inputNome" placeholder="João da Silva">
                 </div>
@@ -36,10 +36,10 @@
                     <input type="password" class="controle" id="inputSenha" placeholder="**************">
                 </div>
                 <div class="infoCPF">
-                  <input type="text" class="controle" id="inputCPF" placeholder="123.456.789-00">
+                  <input type="text" class="controle" id="inputCPF" placeholder="123.456.789-00" readonly>
                 </div>
                 <div class="infoNascimentoTelefone">
-                    <input type="date" class="controle" id="inputDataNascimento">
+                    <input type="date" class="controle" id="inputDataNascimento" readonly>
                     <input type="tel" class="controle" id="inputTelefone" placeholder="(11) 91234-5678">
                 </div>
                 <button type="submit" class="botaoEnviar">Confirmar alterações</button>
@@ -49,5 +49,7 @@
     <footer>
         <p class="texto-footer">© Unicamp</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

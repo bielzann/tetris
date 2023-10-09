@@ -255,3 +255,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 })
+function validarForm() {
+  var nome = document.getElementById('inputNome').value;
+  var email = document.getElementById('inputEmail').value;
+  var nickName = document.getElementById('inputNickName').value;
+  var senha = document.getElementById('inputSenha').value;
+  var telefone = document.getElementById('inputTelefone').value;
+
+  if (nome === '' || email === '' || nickName === '' || senha === '' || telefone === '') {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return false;
+  }
+
+  var regexTelefone = /^\(\d{2}\) \d{5}-\d{4}$/;
+  if (!regexTelefone.test(telefone)) {
+    alert('Número de telefone inválido. Por favor, siga o formato (XX) XXXXX-XXXX.');
+    return false;
+  }
+
+  return true;
+}
+
+document.getElementById('editarForm').addEventListener('submit', function (e) {
+  if (!validarForm()) {
+    e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos ou o número de telefone for inválido
+  }
+});
