@@ -146,7 +146,7 @@ input{
     font-size: 15px;
 }
 
-#inputNome, #inputEmail, #inputCPF, #inputSenhaLogin, .botaoEnviar{
+#inputNome, #inputEmail, #inputEmailLogin, #inputCPF, #inputSenhaLogin, .botaoEnviar{
     width: 90%;
 }
 

@@ -254,7 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-})
+});
+
 function validarForm() {
   var nome = document.getElementById('inputNome').value;
   var email = document.getElementById('inputEmail').value;
@@ -276,8 +277,29 @@ function validarForm() {
   return true;
 }
 
+
+
+function validarLogin(){
+  var emailLogin = document.getElementById('inputEmailLogin').value;
+  var senhaLogin = document.getElementById('inputSenhaLogin').value;
+
+  if(emailLogin === '' || senhaLogin === ''){
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return false;
+  }
+  return true;
+}
+
 document.getElementById('editarForm').addEventListener('submit', function (e) {
   if (!validarForm()) {
     e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos ou o número de telefone for inválido
   }
 });
+
+
+  document.getElementById('validaLogin').addEventListener('submit', function (e) {
+    console.log("Evento de envio do validaLogin acionado");
+    if (!validarLogin()) {
+      e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos
+    }
+  });
