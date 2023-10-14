@@ -256,50 +256,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-function validarForm() {
-  var nome = document.getElementById('inputNome').value;
-  var email = document.getElementById('inputEmail').value;
-  var nickName = document.getElementById('inputNickName').value;
-  var senha = document.getElementById('inputSenha').value;
-  var telefone = document.getElementById('inputTelefone').value;
+//validaçao cadastrar 
+document.addEventListener("DOMContentLoaded", function() {
+const cadastro = document.querySelector("#cadastroForm");
 
-  if (nome === '' || email === '' || nickName === '' || senha === '' || telefone === '') {
-    alert('Por favor, preencha todos os campos obrigatórios.');
-    return false;
-  }
+cadastro.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const nome = document.querySelector("#inputNome").value;
+    const email = document.querySelector("#inputEmail").value;
+    const nickName = document.querySelector("#inputNickName").value;
+    const senha = document.querySelector("#inputSenha").value;
+    const telefone = document.querySelector("#inputTelefone").value;
+    const cpf = document.querySelector("#inputCPF").value;
+    const dNasc = document.querySelector("#inputDataNascimento").value;
 
-  var regexTelefone = /^\(\d{2}\) \d{5}-\d{4}$/;
-  if (!regexTelefone.test(telefone)) {
-    alert('Número de telefone inválido. Por favor, siga o formato (XX) XXXXX-XXXX.');
-    return false;
-  }
+    if (nome === "" || email === "" || nickName === "" || senha === "" || telefone === "" || cpf === "" || dNasc === "") {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }  
+    
+    if (!emailValido(email.value)) {
+        alert("Por favor, insira um e-mail válido.");
+        return;
+    }
 
-  return true;
-}
-
-
-
-function validarLogin(){
-  var emailLogin = document.getElementById('inputEmailLogin').value;
-  var senhaLogin = document.getElementById('inputSenhaLogin').value;
-
-  if(emailLogin === '' || senhaLogin === ''){
-    alert('Por favor, preencha todos os campos obrigatórios.');
-    return false;
-  }
-  return true;
-}
-
-document.getElementById('editarForm').addEventListener('submit', function (e) {
-  if (!validarForm()) {
-    e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos ou o número de telefone for inválido
-  }
+    if (!telefoneValido(telefone.value)) {
+        alert("Número de telefone inválido. Por favor, siga o formato (XX) XXXXX-XXXX.");
+        return;
+    }
+   
+  });
+  
+  //valiaçao editarPerfil
+  const editar = document.querySelector("#editarForm");
+  
+  editar.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const nome = document.querySelector("#inputNome").value;
+    const emailCadastro = document.querySelector("#inputEmail").value;
+    const nickName = document.querySelector("#inputNickName").value;
+    const senha = document.querySelector("#inputSenha").value;
+    const telefone = document.querySelector("#inputTelefone").value;
+    
+    
+    if (!emailValido(emailCadastro.value)) {
+      alert("Por favor, insira um e-mail válido.");
+      return;
+    }
+    
+    if (!telefoneValido(telefone.value)) {
+      alert("Número de telefone inválido. Por favor, siga o formato (XX) XXXXX-XXXX.");
+      return;
+    }
+  });
 });
 
-
-  document.getElementById('validaLogin').addEventListener('submit', function (e) {
-    console.log("Evento de envio do validaLogin acionado");
+  //validaçao conectar
+document.addEventListener("DOMContentLoaded", function() {
+    const login = document.querySelector("#validaLogin");
+    
+    login.addEventListener("submit", (event) => {
+      event.preventDefault();
+    const emailLogin = document.querySelector("#inputEmailLogin");
+    const senhaLogin = document.querySelector("#inputSenhaLogin");
+    
+    if (emailLogin.value === "" || senhaLogin.value === "") {
+      alert("Por favor, preencha os campos obrigatórios.");
+      return;
+    }
+    
+    if (!emailValido(emailLogin.value)) {
+      alert("Por favor, insira um e-mail válido.");
+      return;
+    }
+     
+  });
+});
+  /*document.getElementById('cadastroForm').addEventListener("submit", function (e) {
+    console.log("Evento de envio do editarForm acionado");
+    if (!validarForm()) {
+      e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos ou o número de telefone for inválido
+    }
+  });*/
+  
+  document.getElementById('cadastroForm').addEventListener('submit', function (e) {
+    var cpf = document.getElementById('inputCPF').value;
+    if (!validarCPF(cpf)) {
+      e.preventDefault(); // Impede o envio do formulário se o CPF for inválido
+    }
+  });
+  
+  /*document.getElementById('validaLogin').addEventListener('submit', function (e) {
+    //console.log("Evento de envio do validaLogin acionado");
     if (!validarLogin()) {
       e.preventDefault(); // Impede o envio do formulário se os campos não estiverem preenchidos
     }
-  });
+  });*/
+  
+  function emailValido(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/;
+    
+    if (emailRegex.test(email)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  function telefoneValido(telefone) {
+    const telefoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
+    
+    if (telefoneRegex.test(telefone)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  function validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    
+    if (cpf.length === 1 && cpf.length !== 11) {
+      alert('O CPF deve conter 11 dígitos.');
+      return false;
+    }
+    
+    return true;
+  }
+  
