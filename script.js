@@ -5,9 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.querySelector('#start-button')
   const pauseBtn = document.querySelector('#pause-button')
   const width = 10
+  const tempoDisplay = document.querySelector('#tempo');
+  let linhasEliminadas = 0; // Variável para rastrear o número de linhas eliminadas
+  let segundos = 0;
+  let minutos = 0;
+  let timerInterval; // Variável para armazenar o ID do intervalo do cronômetro
   let nextRandom = 0
   let timerId
   let score = 0
+  let isPaused = false; // Variável para controlar o estado de pausa
   const colors = [
     'orange',
     'red',
@@ -205,23 +211,53 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  //add functionality to the button
-  startBtn.addEventListener('click', () => {
-      startBtn.disabled = true;
-      pauseBtn.disabled = false;  
-      draw();
-      if (nextRandom === 0) {  // Use o valor armazenado em nextRandom
-        nextRandom = Math.floor(Math.random()*theTetrominoes.length);
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      segundos++;
+      if (segundos === 60) {
+        segundos = 0;
+        minutos++;
       }
-      timerId = setInterval(moveDown, 50);
+      tempoDisplay.textContent = (minutos < 10 ? '0' : '') + minutos + ':' + (segundos < 10 ? '0' : '') + segundos;
+    }, 1000); // Atualiza o cronômetro a cada 1000 ms (1 segundo)
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+  }
+
+  // Modifique o evento de clique no botão "Start"
+  startBtn.addEventListener('click', () => {
+    if (!isPaused) { // Se o jogo não estiver pausado
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      if (nextRandom === 0) {
+        nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+      }
+      startTimer(); // Inicia o cronômetro
+      timerId = setInterval(moveDown, 200);
       displayShape();
+    }
   });
 
+  // Modifique o evento de clique no botão "Pause"
   pauseBtn.addEventListener('click', () => {
-    clearInterval(timerId);
-    timerId = null;
-    startBtn.disabled = false;
-    pauseBtn.disabled = true;
+    if (!isPaused) { // Se o jogo não estiver pausado
+      stopTimer(); // Pára o cronômetro
+      clearInterval(timerId);
+      timerId = null;
+      isPaused = true;
+      pauseBtn.innerHTML = 'Resume'; // Altera o texto do botão "Pause" para "Resume"
+      // Desabilita a função de controle do teclado
+      document.removeEventListener('keyup', control);
+    } else { // Se o jogo estiver pausado
+      timerId = setInterval(moveDown, 200); // Resume o jogo
+      isPaused = false;
+      pauseBtn.innerHTML = 'Pause'; // Altera o texto do botão "Pause" para "Pause"
+      // Habilita a função de controle do teclado
+      document.addEventListener('keyup', control);
+      startTimer(); // Continua o cronômetro
+    }
   });
 
   //add score
@@ -249,11 +285,78 @@ document.addEventListener('DOMContentLoaded', () => {
     if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       startBtn.disabled = true;
       pauseBtn.disabled = true;
-      scoreDisplay.innerHTML = 'end'
+      stopTimer(); // Pára o cronômetro
       clearInterval(timerId)
     }
   }
 
+  function reiniciarJogo() {
+    // Limpar a grade
+    squares.forEach((square, index) => {
+      square.classList.remove('tetromino');
+      square.style.backgroundColor = '';
+      // Verifique se o bloco não faz parte dos últimos 10
+      if (index < squares.length - 10) {
+        square.classList.remove('taken');
+      }
+    });
+  
+    // Resto das configurações de reinicialização
+    currentPosition = 4;
+    currentRotation = 0;
+    random = Math.floor(Math.random() * theTetrominoes.length);
+    current = theTetrominoes[random][currentRotation];
+    draw();
+  
+    // Reiniciar o temporizador (ajuste o valor do intervalo conforme necessário)
+    clearInterval(timerId);
+    timerId = setInterval(moveDown, 200);
+  
+    // Limpar a tela de pontuação (se você tiver uma)
+    score = 0;
+    scoreDisplay.innerHTML = score;
+  
+    // Reiniciar o cronômetro
+    segundos = 0;
+    minutos = 0;
+    tempoDisplay.textContent = '00:00';
+  
+    startBtn.disabled = true;
+    pauseBtn.disabled = false;
+    isPaused = false;
+    pauseBtn.innerHTML = 'Pause'; // Altera o texto do botão "Pause" para "Pause"
+    document.addEventListener('keyup', control);
+    linhasEliminadas = 0;
+    document.getElementById('num-linhas').textContent = 'Nº linhas: ' + linhasEliminadas; // Atualiza o número de linhas no elemento HTML
+  }
+  
+  // Adicione um ouvinte de evento ao botão de reinício
+  const restartButton = document.getElementById('restart-button');
+  restartButton.addEventListener('click', () => {
+    reiniciarJogo();
+  });
+  
+  // Função para adicionar score e atualizar o número de linhas
+  function addScore() {
+    for (let i = 0; i < 199; i += width) {
+      const row = [i, i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9];
+
+      if (row.every(index => squares[index].classList.contains('taken'))) {
+        score += 10;
+        scoreDisplay.innerHTML = score;
+        linhasEliminadas++; // Incrementa o número de linhas eliminadas
+        document.getElementById('num-linhas').textContent = 'Nº linhas: ' + linhasEliminadas; // Atualiza o número de linhas no elemento HTML
+        row.forEach(index => {
+          squares[index].classList.remove('taken');
+          squares[index].classList.remove('tetromino');
+          squares[index].style.backgroundColor = '';
+        });
+        const squaresRemoved = squares.splice(i, width);
+        squares = squaresRemoved.concat(squares);
+        squares.forEach(cell => grid.appendChild(cell));
+      }
+    }
+  }
 });
 
 //validaçao cadastrar 
@@ -262,7 +365,6 @@ const cadastro = document.querySelector("#cadastroForm");
 
 cadastro.addEventListener("submit", (event) => {
     event.preventDefault();
-    
     const nome = document.querySelector("#inputNome").value;
     const email = document.querySelector("#inputEmail").value;
     const nickName = document.querySelector("#inputNickName").value;
